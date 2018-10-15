@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class MovingEnemy : Enemy
 {
+	[Header("MOVEMENT")]
 	[SerializeField] protected int speed = 10;
 	[SerializeField] protected int rotationStart = 1;
 	[SerializeField] protected int rotationCadence = 1;
 
-	void Start()
+	[Header("DAMAGE")]
+	[SerializeField] protected int damage = 3;
+
+	protected override void Start()
 	{
+		base.Start();
+
 		InvokeRepeating("RandomRotation", rotationStart, rotationCadence);
 	}
 
 	protected override void Update()
 	{
 		base.Update();
+
 		Move();
 	}
 

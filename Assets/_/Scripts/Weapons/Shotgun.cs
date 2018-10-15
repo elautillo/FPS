@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
-	//attackSpeed = 1f;
-	
+	protected override void Start()
+	{
+		base.Start();
 
-	void Start()
-	{
-		
-	}
-	
-	void Update()
-	{
-		
+		attackSpeed = 1.5f;
+		force = 1000;
+		damage = 4;
 	}
 }

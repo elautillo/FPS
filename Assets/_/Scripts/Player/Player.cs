@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
 	[SerializeField] int health = 20;
 	[SerializeField] int maxHealth = 20;
 	[SerializeField] int heal = 1;
-	[SerializeField] TextMesh healthText;
+	[SerializeField] TextMesh prefabHealthText;
+	TextMesh healthText;
 
 	[Header("WEAPONS")]
 	[SerializeField] Weapon[] weapons = new Weapon[NUM_WEAPONS];
@@ -27,8 +28,8 @@ public class Player : MonoBehaviour
 
     void Update()
 	{
-		TextMesh healthObject = Instantiate(healthText);
-		healthObject.text = health.ToString();
+		healthText = Instantiate(prefabHealthText);
+		healthText.GetComponent<TextMesh>().text = health.ToString();
 
 		ChangeWeapon();
 		Attack();

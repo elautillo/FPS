@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class AK47 : Weapon
 {
-	//attackSpeed = 2f;
 
-	void Start()
+	protected override void Start()
 	{
-		
-	}
-	
-	void Update()
-	{
-		
+		base.Start();
+
+		attackSpeed = 0.5f;
+		force = 2000;
+		damage = 1;
 	}
 }

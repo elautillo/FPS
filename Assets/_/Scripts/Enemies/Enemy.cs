@@ -7,40 +7,33 @@ public class Enemy : MonoBehaviour {
 	[Header("STATE")]
 	[SerializeField] protected bool alive = true;
 	[SerializeField] protected int health = 10;
-	//[SerializeField] int maxHealth;
-	[SerializeField] TextMesh healthText;
-	TextMesh healthObject;
-
-	[Header("ATTACK")]
-	//int speed;
-	[SerializeField] protected int detectionDistance = 5;
-	//int explosionDistance;
-	[SerializeField] protected int damage = 2;
-
-	[Header("FX")]
+	[SerializeField] protected int maxHealth = 10;
+	[SerializeField] protected TextMesh prefabHealthText;
+	protected TextMesh healthText;
 	[SerializeField] protected ParticleSystem explosion;
 
 	[Header("REFERENCES")]
-	[SerializeField] Transform player;
+	protected GameObject player;
+
+	protected void Awake()
+	{
+		player = GameObject.Find("Player");
+	}
 
 	protected virtual void Start()
 	{
-		TextMesh healthObject = Instantiate(healthText);
+		healthText = Instantiate(prefabHealthText);
 	}
 
 	protected virtual void Update()
 	{
-		healthObject.GetComponent<TextMesh>().text = health.ToString();
+		healthText.GetComponent<TextMesh>().text = health.ToString();
 	}
 
-	protected int DetectPlayer()
+	protected Vector3 DetectPlayer()
 	{
-		return 0;
-	}
-
-	protected void Attack()
-	{
-		
+		Vector3 distance = player.transform.position - transform.position;
+		return distance;
 	}
 
 	public void GetDamage(int damage)

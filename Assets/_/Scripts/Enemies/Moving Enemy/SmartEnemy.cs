@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SmartEnemy : MovingEnemy
 {
-	void Start()
+	protected override void Start()
 	{
-		
+		base.Start();
 	}
 
 	protected override void Update()
