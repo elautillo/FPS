@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] protected bool alive = true;
 	[SerializeField] protected int health = 10;
 	[SerializeField] protected int maxHealth = 10;
-	[SerializeField] protected TextMesh prefabHealthText;
-	protected TextMesh healthText;
+
+	[Header("FX")]
 	[SerializeField] protected ParticleSystem explosion;
 
 	[Header("REFERENCES")]
@@ -22,12 +22,12 @@ public class Enemy : MonoBehaviour {
 
 	protected virtual void Start()
 	{
-		healthText = Instantiate(prefabHealthText);
+
 	}
 
 	protected virtual void Update()
 	{
-		healthText.GetComponent<TextMesh>().text = health.ToString();
+		GetComponentInChildren<TextMesh>().text = health.ToString();
 	}
 
 	protected Vector3 DetectPlayer()

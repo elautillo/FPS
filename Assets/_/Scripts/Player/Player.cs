@@ -5,40 +5,34 @@ using System;
 
 public class Player : MonoBehaviour
 {
-	const int NUM_WEAPONS = 2;
-
-	[SerializeField] int activeWeapon = 0;
-
 	[Header("STATE")]
 	[SerializeField] bool alive = true;
 	[SerializeField] int health = 20;
 	[SerializeField] int maxHealth = 20;
 	[SerializeField] int heal = 1;
-	[SerializeField] TextMesh prefabHealthText;
-	TextMesh healthText;
 
 	[Header("WEAPONS")]
+	const int NUM_WEAPONS = 2;
+	[SerializeField] int activeWeapon = 0;
 	[SerializeField] Weapon[] weapons = new Weapon[NUM_WEAPONS];
 
 	void Start()
     {
-        ActivateWeapon(activeWeapon);
+        ActivateWeapon();
 		InvokeRepeating("Heal", 0, 5);
     }
 
     void Update()
 	{
-		healthText = Instantiate(prefabHealthText);
-		healthText.GetComponent<TextMesh>().text = health.ToString();
+		GetComponentInChildren<TextMesh>().text = health.ToString();
 
 		ChangeWeapon();
 		Attack();
 	}
 
-    void ActivateWeapon(int index)
+    void ActivateWeapon()
     {
         DeactivateWeapons();
-		activeWeapon = index;
         weapons[activeWeapon].gameObject.SetActive(true);
     }
 
@@ -54,12 +48,14 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.E) && activeWeapon < NUM_WEAPONS - 1)
         {
-            ActivateWeapon(activeWeapon + 1);
+			activeWeapon++;
+            ActivateWeapon();
         }
 
         if (Input.GetKeyDown(KeyCode.Q) && activeWeapon > 0)
 		{
-			ActivateWeapon(activeWeapon - 1);
+			activeWeapon--;
+			ActivateWeapon();
 		}
 	}
 
@@ -67,7 +63,7 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			weapons[activeWeapon].Shoot();
+			weapons[activeWeapon].TryShoot();
 		}
 	}
 
@@ -93,6 +89,7 @@ public class Player : MonoBehaviour
 
 	void Die()
 	{
-		
+		alive = false;
+		Debug.Log("Your are dead");
 	}
 }

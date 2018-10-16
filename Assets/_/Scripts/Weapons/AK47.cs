@@ -11,6 +11,6 @@ public class AK47 : Weapon
 
 		attackSpeed = 0.5f;
 		force = 2000;
-		damage = 1;
+		damage = 1; // ???????
 	}
 }

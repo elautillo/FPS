@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-	void Start()
+	protected int damage;
+
+	protected virtual void Start()
 	{
-		
+		//Invoke("Destroy", 2);
 	}
 	
 	void Update()
@@ -14,15 +16,20 @@ public class Projectile : MonoBehaviour
 		
 	}
 
-	void OnTriggerEnter(Collider other)
+	protected virtual void OnTriggerEnter(Collider other, string tag)
 	{
 		GameObject target = other.gameObject;
 
-		if (target.tag == "Enemy")
+		if (target.tag == tag)
 		{
-			target.GetComponent<Enemy>().GetDamage(2);
+			target.GetComponent(tag).GetDamage(damage);
 		}
-		
+
+		Destroy();
+	}
+
+	void Destroy()
+	{
 		Destroy(this.gameObject);
 	}
 }

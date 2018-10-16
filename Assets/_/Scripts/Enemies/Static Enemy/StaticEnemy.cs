@@ -5,10 +5,9 @@ using UnityEngine;
 public class StaticEnemy : Enemy
 {
 	[Header("ATTACK")]
-	[SerializeField] Transform projectileSpawner;
 	[SerializeField] GameObject prefabProjectile;
 	[SerializeField] float attackDistance = 15; 
-	[SerializeField] float attackSpeed = 1;
+	[SerializeField] float attackSpeed = 2f;
 	float shotCadence;
 	[SerializeField] int force = 1000;
 
@@ -22,31 +21,41 @@ public class StaticEnemy : Enemy
 	{
 		base.Update();
 
-		transform.LookAt(player.transform.position);
+		Vector3 target = new Vector3(
+			player.transform.position.x,
+			transform.position.y,
+			player.transform.position.z);
+
+		transform.LookAt(target);
 
 		Vector3 distance = DetectPlayer();
 
 		if (distance.sqrMagnitude < attackDistance * attackDistance)
 		{
-			Shoot();
+			TryShoot();
 		}
 	}
 	
-	void Shoot()
+	void TryShoot()
 	{
 		shotCadence += Time.deltaTime;
 
 		if (shotCadence >= attackSpeed)
-		{
-			shotCadence = 0;
+        {
+            shotCadence = 0;
 
-			GameObject projectile = Instantiate(
-				prefabProjectile,
-				projectileSpawner.position,
-				projectileSpawner.rotation);
+            Shoot();
+        }
+    }
 
-			projectile.GetComponent<Rigidbody>().AddRelativeForce(
-				Vector3.forward * force);
-		}
-	}
+    private void Shoot()
+    {
+        GameObject projectile = Instantiate(
+            prefabProjectile,
+            transform.position,
+            transform.rotation);
+
+        projectile.GetComponent<Rigidbody>().AddRelativeForce(
+            Vector3.forward * force);
+    }
 }
