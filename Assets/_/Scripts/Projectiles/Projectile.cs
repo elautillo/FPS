@@ -16,13 +16,18 @@ public class Projectile : MonoBehaviour
 		
 	}
 
-	protected virtual void OnTriggerEnter(Collider other, string tag)
+	protected virtual void OnTriggerEnter(Collider other)
 	{
 		GameObject target = other.gameObject;
 
-		if (target.tag == tag)
+		if (target.tag == "Enemy")
 		{
-			target.GetComponent(tag).GetDamage(damage);
+			target.GetComponent<Enemy>().GetDamage(damage);
+		}
+
+		if (target.tag == "Player")
+		{
+			target.GetComponent<Player>().GetDamage(damage);
 		}
 
 		Destroy();

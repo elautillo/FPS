@@ -15,11 +15,4 @@ public class CannonBall : Projectile
 	{
 		
 	}
-
-	protected override void OnTriggerEnter(Collider other, string tag)
-	{
-		tag = "Player";
-
-		base.OnTriggerEnter(other, tag);
-	}
 }

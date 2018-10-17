@@ -15,11 +15,4 @@ public class Bullet : Projectile
 	{
 		
 	}
-
-	protected override void OnTriggerEnter(Collider other, string target)
-	{
-		tag = "Enemy";
-		
-		base.OnTriggerEnter(other, tag);
-	}
 }
