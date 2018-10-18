@@ -36,7 +36,7 @@ public class MovingEnemy : Enemy
 
 	protected void Rotation()
 	{
-		transform.Rotate(0, 180f, 0);
+		transform.Rotate(0, 90f, 0);
 	}
 
 	protected void RandomRotation()
