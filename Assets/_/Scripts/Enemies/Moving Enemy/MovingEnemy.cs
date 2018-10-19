@@ -6,8 +6,10 @@ public class MovingEnemy : Enemy
 {
 	[Header("MOVEMENT")]
 	[SerializeField] protected int speed = 10;
-	[SerializeField] protected int rotationStart = 1;
-	[SerializeField] protected int rotationCadence = 1;
+	[SerializeField] protected Transform direction;
+
+	//[SerializeField] protected int rotationStart = 1;
+	//[SerializeField] protected int rotationCadence = 1;
 
 	[Header("DAMAGE")]
 	[SerializeField] protected int damage = 3;
@@ -16,7 +18,9 @@ public class MovingEnemy : Enemy
 	{
 		base.Start();
 
-		InvokeRepeating("RandomRotation", rotationStart, rotationCadence);
+		direction = GetComponentInParent<Transform>();
+
+		//InvokeRepeating("RandomRotation", rotationStart, rotationCadence);
 	}
 
 	protected override void Update()
@@ -30,11 +34,11 @@ public class MovingEnemy : Enemy
 	{
 		if (alive)
 		{
-			transform.Translate(Vector3.forward * speed * Time.deltaTime);
+			direction.Translate(Vector3.forward * speed * Time.deltaTime);
 		}
 	}
 
-	protected void Rotation()
+	/* protected void Rotation()
 	{
 		transform.Rotate(0, 90f, 0);
 	}
@@ -43,11 +47,16 @@ public class MovingEnemy : Enemy
     {
         float rotation = Random.Range(0f, 360f);
         transform.eulerAngles = new Vector3(0, rotation, 0);
-    }
+    }*/
 
 	void OnCollisionEnter(Collision collision)
     {
-		Rotation();
+		//Rotation();
+
+		if (collision.gameObject.tag == "Wall")
+		{
+			direction.Rotate(0, 90, 0);
+		}
 
 		if (collision.gameObject.name == "Player")
 		{
