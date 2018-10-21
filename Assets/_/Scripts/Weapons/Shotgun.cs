@@ -10,6 +10,6 @@ public class Shotgun : Weapon
 
 		attackSpeed = 1.5f;
 		force = 1000;
-		damage = 4;
+		//damage = 4;
 	}
 }
