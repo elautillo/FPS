@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Bullet : Projectile
 {
-	protected override void Start()
+	void Start()
 	{
-		damage = 2;
-
-		base.Start();
+		damage = 1;
 	}
-	
-	void Update()
+
+	protected override void OnTriggerEnter(Collider other)
 	{
-		
+		GameObject target = other.gameObject;
+
+		if (target.tag == "Enemy")
+		{
+			target.GetComponent<Enemy>().GetDamage(damage);
+		}
+
+		Destroy(this.gameObject);
 	}
 }

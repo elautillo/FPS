@@ -2,20 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
-
+public class EnemySpawner : MonoBehaviour
+{
+	bool active = false;
 	int numEnemies = 0;
+	GameObject turret;
 	[SerializeField] int maxEnemies = 15; 
 	[SerializeField] GameObject newEnemy;
 
-	void Start()
+	void Awake()
 	{
-		InvokeRepeating("CreateEnemy", 0, 5);
+		turret = GameObject.Find("Turret");
 	}
 	
 	void Update()
 	{
-		
+		if (!active && turret == null)
+		{
+			active = true;
+
+			InvokeRepeating("CreateEnemy", 0, 5);
+		}
 	}
 
 	void CreateEnemy()

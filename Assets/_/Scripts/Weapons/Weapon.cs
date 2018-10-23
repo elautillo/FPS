@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-	[SerializeField] GameObject prefabProjectile;
-	[SerializeField] protected float attackSpeed;
+	[SerializeField] protected Transform shootPoint;
+	[SerializeField] protected GameObject prefabProjectile;
+	[SerializeField] protected float attackSpeed = 2f;
 	float shotCadence;
 	[SerializeField] protected int force;
-    
-	//[SerializeField] protected int damage;
 
 	protected virtual void Start()
 	{
@@ -28,14 +27,5 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void Shoot()
-    {
-        GameObject projectile = Instantiate(
-            prefabProjectile,
-            transform.position,
-            transform.rotation);
-
-        projectile.GetComponent<Rigidbody>().AddRelativeForce(
-            Vector3.forward * force);
-    }
+    public virtual void Shoot(){}
 }

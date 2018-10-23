@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 	[Header("STATE")]
-	[SerializeField] bool alive = true;
+	bool alive = true;
 	[SerializeField] int health = 20;
 	[SerializeField] int maxHealth = 20;
 	[SerializeField] int heal = 1;
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
 
     void Update()
 	{
-		GetComponentInChildren<TextMesh>().text = health.ToString();
+		if (alive) GetComponentInChildren<TextMesh>().text = health.ToString();
 
 		ChangeWeapon();
 		Attack();
@@ -63,8 +65,13 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			weapons[activeWeapon].TryShoot();
+			weapons[activeWeapon].Shoot();
 		}
+	}
+
+	public void Recharge()
+	{
+		GetComponentInChildren<Crossbow>().staticArrow.SetActive(true);
 	}
 
 	public void Heal()
@@ -80,16 +87,21 @@ public class Player : MonoBehaviour
 
 		if (health <= 0)
 		{
-			health = 0;
 			Die();
 		}
-
-		Debug.Log(health);
 	}
 
 	void Die()
 	{
 		alive = false;
-		Debug.Log("Your are dead");
+
+		GetComponentInChildren<TextMesh>().text = "GAME OVER";
+
+		Invoke("Restart", 2);
 	}
+
+	private void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

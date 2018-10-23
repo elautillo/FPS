@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class CannonBall : Projectile
 {
-	protected override void Start()
+	void Start()
 	{
 		damage = 3;
-
-		base.Start();
 	}
-	
-	void Update()
+
+	protected override void OnTriggerEnter(Collider other)
 	{
-		
+		GameObject target = other.gameObject;
+
+		if (target.tag == "Player")
+		{
+			target.GetComponent<Player>().GetDamage(damage);
+		}
+
+		Destroy(this.gameObject);
 	}
 }

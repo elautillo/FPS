@@ -5,6 +5,8 @@ using UnityEngine;
 public class StaticEnemy : Enemy
 {
 	[Header("ATTACK")]
+	[SerializeField] Transform shootPoint;
+	[SerializeField] Transform turningPoint;
 	[SerializeField] GameObject prefabProjectile;
 	[SerializeField] float attackDistance = 15; 
 	[SerializeField] float attackSpeed = 2f;
@@ -14,6 +16,7 @@ public class StaticEnemy : Enemy
 	protected override void Start()
 	{
 		base.Start();
+
 		shotCadence = attackSpeed;
 	}
 
@@ -52,8 +55,8 @@ public class StaticEnemy : Enemy
     {
         GameObject projectile = Instantiate(
             prefabProjectile,
-            transform.position,
-            transform.rotation);
+            shootPoint.transform.position,
+            shootPoint.transform.rotation);
 
         projectile.GetComponent<Rigidbody>().AddRelativeForce(
             Vector3.forward * force);

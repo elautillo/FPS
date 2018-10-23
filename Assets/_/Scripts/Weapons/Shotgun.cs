@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
-	protected override void Start()
-	{
-		base.Start();
+	public override void Shoot()
+    {
+        GameObject bullet = Instantiate(
+				prefabProjectile,
+				transform.position,
+				transform.rotation);
 
-		attackSpeed = 1.5f;
-		force = 1000;
-		//damage = 4;
-	}
+        bullet.GetComponent<Rigidbody>().AddRelativeForce(
+            Vector3.forward * force);
+    }
 }

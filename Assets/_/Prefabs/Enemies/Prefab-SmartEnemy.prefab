@@ -68,8 +68,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1728046542599196}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.076788, y: 1.38, z: 10.4810505}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 20.63995, y: 0.9132711, z: 18.939854}
+  m_LocalScale: {x: 1, y: 0.9132711, z: 1}
   m_Children:
   - {fileID: 4644115840474726}
   m_Father: {fileID: 0}
@@ -123,7 +123,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 05de60e245ea40d4fb014d99cc243762, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,7 +172,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1809641761965590}
-  m_Text: 20
+  m_Text: 10
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -200,13 +200,13 @@ MonoBehaviour:
   alive: 1
   health: 10
   maxHealth: 10
-  prefabHealthText: {fileID: 102157387001925064, guid: b30de4353f8d4db4caf43a6a0f8c2656,
-    type: 2}
   explosion: {fileID: 19860484, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 2}
-  speed: 10
+  speed: 5
+  target: []
+  detectionRange: 6
+  damage: 2
   rotationStart: 1
   rotationCadence: 1
-  damage: 2
 --- !u!136 &136339490817787448
 CapsuleCollider:
   m_ObjectHideFlags: 1
