@@ -6,7 +6,7 @@ public class CannonBall : Projectile
 {
 	void Start()
 	{
-		damage = 3;
+		damage = 2;
 	}
 
 	protected override void OnTriggerEnter(Collider other)

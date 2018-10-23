@@ -17,6 +17,10 @@ public class Bullet : Projectile
 		{
 			target.GetComponent<Enemy>().GetDamage(damage);
 		}
+		else if (target.tag == "Boss")
+		{
+			target.GetComponent<Boss>().GetDamage(damage);
+		}
 
 		Destroy(this.gameObject);
 	}

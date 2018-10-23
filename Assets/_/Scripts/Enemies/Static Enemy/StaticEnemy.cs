@@ -6,17 +6,14 @@ public class StaticEnemy : Enemy
 {
 	[Header("ATTACK")]
 	[SerializeField] Transform shootPoint;
-	[SerializeField] Transform turningPoint;
 	[SerializeField] GameObject prefabProjectile;
 	[SerializeField] float attackDistance = 15; 
 	[SerializeField] float attackSpeed = 2f;
 	float shotCadence;
 	[SerializeField] int force = 1000;
 
-	protected override void Start()
+	void Start()
 	{
-		base.Start();
-
 		shotCadence = attackSpeed;
 	}
 
@@ -37,6 +34,11 @@ public class StaticEnemy : Enemy
 		{
 			TryShoot();
 		}
+
+		// if (!GetComponent<Renderer>().isVisible)
+		// {
+		// 	GameObject.Find("Cannon").GetComponent<Renderer>().enabled = false;
+		// }
 	}
 	
 	void TryShoot()

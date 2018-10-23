@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 	[Header("STATE")]
-	bool alive = true;
 	[SerializeField] int health = 20;
 	[SerializeField] int maxHealth = 20;
 	[SerializeField] int heal = 1;
@@ -18,15 +17,21 @@ public class Player : MonoBehaviour
 	[SerializeField] int activeWeapon = 0;
 	[SerializeField] Weapon[] weapons = new Weapon[NUM_WEAPONS];
 
+	[Header("FX")]
+	ParticleSystem blood;
+
 	void Start()
     {
         ActivateWeapon();
+
+		blood = GetComponentInChildren<ParticleSystem>();
+
 		InvokeRepeating("Heal", 0, 5);
     }
 
     void Update()
 	{
-		if (alive) GetComponentInChildren<TextMesh>().text = health.ToString();
+		GetComponentInChildren<TextMesh>().text = health.ToString();
 
 		ChangeWeapon();
 		Attack();
@@ -71,7 +76,18 @@ public class Player : MonoBehaviour
 
 	public void Recharge()
 	{
-		GetComponentInChildren<Crossbow>().staticArrow.SetActive(true);
+		if (activeWeapon == 0)
+		{
+			AudioSource[] audio = GetComponents<AudioSource>();
+
+			audio[1].Play();
+
+			GetComponentInChildren<Crossbow>().staticArrow.SetActive(true);
+		}
+		else
+		{
+			Debug.Log("Crossbow unactive.");
+		}
 	}
 
 	public void Heal()
@@ -85,6 +101,8 @@ public class Player : MonoBehaviour
 	{
 		health = health - damage;
 
+		blood.Play();
+
 		if (health <= 0)
 		{
 			Die();
@@ -93,9 +111,7 @@ public class Player : MonoBehaviour
 
 	void Die()
 	{
-		alive = false;
-
-		GetComponentInChildren<TextMesh>().text = "GAME OVER";
+		GameObject.Find("MainText").GetComponent<TextMesh>().text = "GAME OVER";
 
 		Invoke("Restart", 2);
 	}

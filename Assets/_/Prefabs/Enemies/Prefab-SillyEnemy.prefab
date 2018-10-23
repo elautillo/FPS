@@ -238,16 +238,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0bff59f7609e6b429f459b9d5fac7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alive: 1
   health: 10
   maxHealth: 10
-  explosion: {fileID: 198588446675534978, guid: 6184d3bb475bd864dbf6ee3acc195b68,
+  particles: {fileID: 198775406128709474, guid: a64dbd4523516af45b75d924e776a9cd,
     type: 2}
   speed: 10
+  detectionRange: 0
+  damage: 3
   target:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  detectionRange: 0
-  damage: 3

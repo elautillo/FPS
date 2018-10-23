@@ -7,7 +7,8 @@ public class EnemySpawner : MonoBehaviour
 	bool active = false;
 	int numEnemies = 0;
 	GameObject turret;
-	[SerializeField] int maxEnemies = 15; 
+	[SerializeField] int spawningRatio = 15;
+	[SerializeField] int maxEnemies = 15;
 	[SerializeField] GameObject newEnemy;
 
 	void Awake()
@@ -21,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
 		{
 			active = true;
 
-			InvokeRepeating("CreateEnemy", 0, 5);
+			InvokeRepeating("CreateEnemy", 0, spawningRatio);
 		}
 	}
 

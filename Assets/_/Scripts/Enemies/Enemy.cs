@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
-
+public class Enemy : MonoBehaviour
+{
 	[Header("STATE")]
-	[SerializeField] protected bool alive = true;
 	[SerializeField] protected int health = 10;
-	[SerializeField] protected int maxHealth = 10;
 
 	[Header("FX")]
-	[SerializeField] protected ParticleSystem explosion;
+	[SerializeField] protected ParticleSystem particles;
 
 	[Header("REFERENCES")]
 	protected GameObject player;
@@ -18,11 +16,6 @@ public class Enemy : MonoBehaviour {
 	protected void Awake()
 	{
 		player = GameObject.Find("Player");
-	}
-
-	protected virtual void Start()
-	{
-
 	}
 
 	protected virtual void Update()
@@ -46,18 +39,24 @@ public class Enemy : MonoBehaviour {
 
 		if (health <= 0)
 		{
-			health = 0;
-
 			Die();
 		}
 	}
 
 	protected void Die()
 	{
-		alive = false;
+		GetComponentInChildren<TextMesh>().text = "";
 
-		Instantiate(explosion, transform.position, Quaternion.identity);
-		explosion.Play();
+		this.gameObject.GetComponent<Renderer>().enabled = false;
+
+    	ParticleSystem explosion = Instantiate(particles, transform.position, Quaternion.identity);
+
+        explosion.Play();
+
+		if (GameObject.FindGameObjectsWithTag("Enemy") == null)
+		{
+			GameObject.Find("Door").gameObject.SetActive(false);
+		}
 
 		Invoke("Destroy", 0.5f);
 	}

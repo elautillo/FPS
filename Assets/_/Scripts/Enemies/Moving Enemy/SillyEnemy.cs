@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SillyEnemy : MovingEnemy
-{	
-	protected override void Start()
+{
+	[SerializeField] protected Transform[] target;
+	protected int current;
+	protected int counter = 1;
+	protected bool active = false;
+	
+	void Start()
 	{
 		GetComponentInChildren<TextMesh>().GetComponent<Renderer>().enabled = false;
 	}
@@ -30,30 +35,27 @@ public class SillyEnemy : MovingEnemy
 
 	protected override void Move()
     {
-        if (alive)
+		if (transform.position != target[current].position)
 		{
-			if (transform.position != target[current].position)
-			{
-				Vector3 direction = Vector3.MoveTowards(
-					transform.position,
-					target[current].position,
-					speed * Time.deltaTime);
+			Vector3 direction = Vector3.MoveTowards(
+				transform.position,
+				target[current].position,
+				speed * Time.deltaTime);
 
-				GetComponent<Rigidbody>().MovePosition(direction);
+			GetComponent<Rigidbody>().MovePosition(direction);
+		}
+		else
+		{
+			current += counter;
+
+			if (current == target.Length - 1)
+			{
+				counter = (-1);
 			}
-			else
+
+			if (current == 0)
 			{
-				current += counter;
-
-				if (current == target.Length - 1)
-				{
-					counter = (-1);
-				}
-
-				if (current == 0)
-				{
-					counter = 1;
-				}
+				counter = 1;
 			}
 		}
     }

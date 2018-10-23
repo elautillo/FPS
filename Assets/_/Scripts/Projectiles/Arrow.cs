@@ -19,7 +19,13 @@ public class Arrow : Projectile
 
 			Destroy();
 		}
-        else if (target.tag == "Wall")
+        else if (target.tag == "Boss")
+		{
+			target.GetComponent<Boss>().GetDamage(damage);
+
+			Destroy();
+		}
+		else if (target.tag == "Wall")
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
 

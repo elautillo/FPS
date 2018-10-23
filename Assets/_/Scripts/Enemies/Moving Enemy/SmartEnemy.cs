@@ -7,10 +7,8 @@ public class SmartEnemy : MovingEnemy
 	[SerializeField] protected int rotationStart = 1;
 	[SerializeField] protected int rotationCadence = 1;
 
-	protected override void Start()
+	void Start()
 	{
-		base.Start();
-
 		InvokeRepeating("RandomRotation", rotationStart, rotationCadence);
 	}
 

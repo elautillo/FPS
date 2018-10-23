@@ -15,17 +15,17 @@ public class Weapon : MonoBehaviour
 		shotCadence = attackSpeed;
 	}
 
-	public void TryShoot()
-	{
-		shotCadence += Time.deltaTime;
+	// public void TryShoot()
+	// {
+	// 	shotCadence += Time.deltaTime;
 
-		if (shotCadence >= attackSpeed)
-        {
-            shotCadence = 0;
+	// 	if (shotCadence >= attackSpeed)
+    //     {
+    //         shotCadence = 0;
 
-            Shoot();
-        }
-    }
+    //         Shoot();
+    //     }
+    // }
 
     public virtual void Shoot(){}
 }
