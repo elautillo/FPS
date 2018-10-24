@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -113,10 +114,17 @@ public class Boss : MonoBehaviour
 		GameObject.Find("MainText").GetComponent<TextMesh>().text = "VICTORY";
 
 		Invoke("Destroy", 0.5f);
+
+		Invoke("Restart", 2);
 	}
 
 	void Destroy()
 	{
 		Destroy(this.gameObject);
 	}
+
+	void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
 }
